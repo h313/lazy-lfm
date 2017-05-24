@@ -16,7 +16,7 @@ class Track(IsDescription):
 h5file = open_file("output.h5", mode="w", title="Spotify Tracks")
 group = h5file.create_group(h5file.root, 'trackinfo', 'track information')
 
-table = h5file.create_table(group, 'trackinfo', Track)
+table = h5file.create_table(group, target, Track)
 track = table.row
 
 top = network.get_user(target).get_top_tracks(time_period)
