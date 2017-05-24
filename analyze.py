@@ -1,3 +1,4 @@
+# Pulls top 50 Last.fm songs and puts that data into output.h5
 from tables import *
 from config import network, time_period, spotify, targets
 

@@ -1,8 +1,8 @@
+#Analyzes a single Spotify track
 from config import spotify
-import json
 
-TRACK = 'Everglow'
-ARTIST = 'Coldplay'
+TRACK = 'Me'
+ARTIST = 'The 1975'
 
 result = spotify.search(q='track:"' + TRACK + '"artist:"' + ARTIST + '"', type='track')
 
