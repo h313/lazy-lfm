@@ -1,7 +1,6 @@
-# Pulls top 50 Last.fm songs and puts that data into output.h5
+# Analyze existing output.h5
 from tables import *
-from config import network, time_period, spotify, targets
-
+import numpy as np
 
 class Track(IsDescription):
     song = StringCol(128)
@@ -18,42 +17,43 @@ class Track(IsDescription):
     key = Int32Col()
     mode = StringCol(5)
 
-h5file = open_file('output.h5', mode='w', title='Spotify Tracks')
-group = h5file.create_group(h5file.root, 'trackinfo', 'track information')
+h5file = open_file('output.h5', mode='r', title='Spotify Tracks')
 
-for target in targets:
-    print('creating new table for ' + target + '...')
-    table = h5file.create_table(group, target, Track)
-    track = table.row
+danceability = np.array([])
+acousticness = np.array([])
+energy = np.array([])
+valence = np.array([])
+tempo = np.array([])
 
-    print('getting top songs for ' + target + '...')
-    top = network.get_user(target).get_top_tracks(time_period)
+for table in h5file.root.trackinfo:
+    for track in table:
+        danceability = np.append(danceability, track['danceability'])
+        acousticness = np.append(acousticness, track['acousticness'])
+        energy = np.append(energy, track['energy'])
+        valence = np.append(valence, track['valence'])
+        tempo = np.append(tempo, track['tempo'])
 
-    print('getting songs...')
-    for i in range(50):
-        result = spotify.search(q='track:"' + top[i].item.title + '"artist:"' + top[i].item.artist.name + '"',
-                                type='track')
-
-        if len(result['tracks']['items']) is not 0:
-            analysis = spotify.audio_features(result['tracks']['items'][0]['uri'])[0]
-
-            track['song'] = result['tracks']['items'][0]['name']
-            track['album'] = result['tracks']['items'][0]['album']['name']
-            track['danceability'] = analysis['danceability']
-            track['loudness'] = analysis['loudness']
-            track['acousticness'] = analysis['acousticness']
-            track['instrumentalness'] = analysis['instrumentalness']
-            track['liveness'] = analysis['liveness']
-            track['valence'] = analysis['valence']
-            track['speechiness'] = analysis['speechiness']
-            track['tempo'] = analysis['tempo']
-            track['energy'] = analysis['energy']
-            track['key'] = analysis['key']
-            track['mode'] = 'minor' if analysis['mode'] is 0 else 'major'
-            track.append()
-            print(result['tracks']['items'][0]['name'] + ' - ' + result['tracks']['items'][0]['album']['name'])
-            table.flush()
-
-    print('finished!')
+    print('Average values for ' + table.name + ':')
+    print('    Valence:')
+    print('        Mean: ' + str(np.mean(valence)))
+    print('        Median: ' + str(np.median(valence)))
+    print('        Standard Deviation: ' + str(np.std(valence)))
+    print('    Danceability:')
+    print('        Mean: ' + str(np.mean(danceability)))
+    print('        Median: ' + str(np.median(danceability)))
+    print('        Standard Deviation: ' + str(np.std(danceability)))
+    print('    Acousticness:')
+    print('        Mean: ' + str(np.mean(acousticness)))
+    print('        Median: ' + str(np.median(acousticness)))
+    print('        Standard Deviation: ' + str(np.std(acousticness)))
+    print('    Energy:')
+    print('        Mean: ' + str(np.mean(energy)))
+    print('        Median: ' + str(np.median(energy)))
+    print('        Standard Deviation: ' + str(np.std(energy)))
+    print('    Tempo:')
+    print('        Mean: ' + str(np.mean(tempo)))
+    print('        Median: ' + str(np.median(tempo)))
+    print('        Standard Deviation: ' + str(np.std(tempo)))
+    print()
 
 h5file.close()
