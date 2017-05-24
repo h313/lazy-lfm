@@ -6,16 +6,19 @@ from spotipy.oauth2 import SpotifyClientCredentials
 # Obtain yours from http://www.last.fm/api/account/create for Last.fm
 lastfm_public_key = ""
 lastfm_secret_key = ""
-lastfm_username = ""
+# This is your last.fm password and stuff
+lastfm_username = "h313"
 lastfm_password = ""
+# This is the username you're trying to look at info about
+target = "h313"
 # Uncomment one of these to get stats on the top songs
 time_period = 'PERIOD_OVERALL'
 # time_period = 'PERIOD_12MONTHS'
 # time_period = 'PERIOD_6MONTHS'
 # time_period = 'PERIOD_3MONTHS'
 
-SPOTIPY_CLIENT_ID=''
-SPOTIPY_CLIENT_SECRET=''
+SPOTIPY_CLIENT_ID = ''
+SPOTIPY_CLIENT_SECRET = ''
 
 client_credentials_manager = SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
 spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
