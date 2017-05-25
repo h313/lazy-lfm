@@ -1,4 +1,4 @@
-# Plot valence existing output.h5
+# Plot valence using existing output.h5
 from tables import *
 import numpy as np
 import pylab as P
@@ -22,22 +22,22 @@ class Track(IsDescription):
 h5file = open_file('output.h5', mode='r', title='Spotify Tracks')
 
 for table in h5file.root.trackinfo:
-    valence = np.array([])
+    liveness = np.array([])
 
     for track in table:
-        valence = np.append(valence, track['valence'])
+        liveness = np.append(liveness, track['liveness'])
 
-    valence = valence.astype(float)
+    liveness = liveness.astype(float)
     p = P.figure()
-    bp = P.boxplot(valence)
+    bp = P.boxplot(liveness)
 
-    p.suptitle('Valence Distribution for ' + table.name, fontsize=20)
-    P.ylabel('Valence Score')
+    p.suptitle('Acousticness Distribution for ' + table.name, fontsize=20)
+    P.ylabel('Acousticness Score')
     P.ylim([0, 1])
 
-    for i in range(valence.size):
-        y = valence
-        x = np.random.normal(1 + i, 0.04, size=valence.size)
+    for i in range(liveness.size):
+        y = liveness
+        x = np.random.normal(1 + i, 0.04, size=liveness.size)
         P.plot(x, y, 'ro', alpha=0.2)
 
 P.show()
