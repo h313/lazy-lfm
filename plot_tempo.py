@@ -22,22 +22,22 @@ class Track(IsDescription):
 h5file = open_file('output.h5', mode='r', title='Spotify Tracks')
 
 for table in h5file.root.trackinfo:
-    liveness = np.array([])
+    tempo = np.array([])
 
     for track in table:
-        liveness = np.append(liveness, track['liveness'])
+        tempo = np.append(tempo, track['tempo'])
 
-    liveness = liveness.astype(float)
+    tempo = tempo.astype(float)
     p = P.figure()
-    bp = P.boxplot(liveness)
+    bp = P.boxplot(tempo)
 
-    p.suptitle('Liveness Distribution for ' + table.name, fontsize=20)
-    P.ylabel('Linveness Score')
-    P.ylim([0, 1])
+    p.suptitle('Tempo Distribution for ' + table.name, fontsize=20)
+    P.ylabel('Tempo Score')
+    P.ylim([25, 225])
 
-    for i in range(liveness.size):
-        y = liveness
-        x = np.random.normal(1 + i, 0.04, size=liveness.size)
+    for i in range(tempo.size):
+        y = tempo
+        x = np.random.normal(1 + i, 0.04, size=tempo.size)
         P.plot(x, y, 'ro', alpha=0.2)
 
 P.show()

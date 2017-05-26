@@ -8,7 +8,7 @@ lastfm_public_key = ""
 lastfm_secret_key = ""
 # You have to have your own unique two values for Spotify API keys
 # Obtain yours from https://developer.spotify.com/my-applications/#!/applications/create
-SPOTIPY_CLIENT_ID = ""
+SPOTIPY_CLIENT_ID = "
 SPOTIPY_CLIENT_SECRET = ""
 SPOTIPY_REDIRECT_URI = ''
 
@@ -20,13 +20,13 @@ username = ""
 
 # Use the following two configs for create_hdf5.py
 # This is the usernames you're trying to look at info about
-targets = ["", "", '"]
+targets = ["", "", ""]
 
 # Uncomment one of these to get stats on the top songs
-# time_period = 'PERIOD_OVERALL'
+time_period = 'PERIOD_OVERALL'
 # time_period = 'PERIOD_12MONTHS'
 # time_period = 'PERIOD_6MONTHS'
-time_period = 'PERIOD_3MONTHS'
+# time_period = 'PERIOD_3MONTHS'
 
 # Use the following if you are using create_playlist.py, which requires an output.h5
 
