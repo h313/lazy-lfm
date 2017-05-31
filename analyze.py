@@ -2,6 +2,7 @@
 from tables import *
 import numpy as np
 
+
 class Track(IsDescription):
     song = StringCol(128)
     album = StringCol(128)

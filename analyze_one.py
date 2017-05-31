@@ -1,8 +1,8 @@
 #Analyzes a single Spotify track
 from config import spotify
 
-TRACK = 'Me'
-ARTIST = 'The 1975'
+TRACK = 'Mercy'
+ARTIST = 'OneRepublic'
 
 result = spotify.search(q='track:"' + TRACK + '"artist:"' + ARTIST + '"', type='track')
 
