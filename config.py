@@ -8,7 +8,7 @@ lastfm_public_key = ""
 lastfm_secret_key = ""
 # You have to have your own unique two values for Spotify API keys
 # Obtain yours from https://developer.spotify.com/my-applications/#!/applications/create
-SPOTIPY_CLIENT_ID = "
+SPOTIPY_CLIENT_ID = ""
 SPOTIPY_CLIENT_SECRET = ""
 SPOTIPY_REDIRECT_URI = ''
 
