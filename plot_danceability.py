@@ -1,4 +1,4 @@
-# Plot energy using existing output.h5
+# Plot danceability using existing output.h5
 from tables import *
 import numpy as np
 import pylab as P
