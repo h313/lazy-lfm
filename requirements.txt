@@ -1,0 +1,5 @@
+tables
+numpy
+matplotlib
+pylast
+spotipy
